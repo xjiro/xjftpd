@@ -47,13 +47,17 @@ User=www-data
 Group=www-data
 Restart=always
 RestartSec=3
-StandardOutput=syslog
-StandardError=syslog
 SyslogIdentifier=xjftpd
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+If you're using a low port (<1024) and don't want to run as root, explicitly allow the bind with setcap:
+```sh
+sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/xjftpd
+```
+
 
 Enable and start the service:
 
